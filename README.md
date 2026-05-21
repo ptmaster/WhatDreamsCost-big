@@ -2,8 +2,6 @@
 Expand the image display for the WhatDreamsCost node and enlarge the input area of the prompt box
 Complete node address:  https://github.com/WhatDreamsCost/WhatDreamsCost-ComfyUI
 Thanks to WhatDreamsCost for the open-source contribution. The JS files in this repository only modify the appearance of the nodes.
-Usage: Overwrite the files with the same name in the original node's JS directory using these JS files.Complete node address: https://github.com/WhatDreamsCost/WhatDreamsCost-ComfyUI
-Thanks to WhatDreamsCost for the open-source contribution. The JS files in this repository only modify the appearance of the nodes.
 Usage: Overwrite the files with the same name in the original node's JS directory using these JS files.
 
 <img width="2055" height="1638" alt="QQ_1779344849458" src="https://github.com/user-attachments/assets/c0642c6c-ae34-4295-818c-58dd961496ae" />

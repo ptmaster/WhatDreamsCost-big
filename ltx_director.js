@@ -104,7 +104,7 @@ const STYLES = `
     border-radius: 6px;
     padding: 8px;
     resize: none; /* Removed the manual resize corner handle */
-    font-size: 20px;
+    font-size: 22px;
     line-height: 1.4;
     box-sizing: border-box;
     outline: none;
@@ -1642,34 +1642,20 @@ class TimelineEditor {
     const mode = this.displayModeWidget ? this.displayModeWidget.value : "seconds";
 
     if (this.durationFramesWidget) {
-      const isVisible = mode === "frames";
-      // We don't set type to "hidden" anymore because it breaks rendering in Nodes 2.0.
-      // We keep the type as "INT" and use computeSize to hide it.
+      // Always visible regardless of display mode
       this.durationFramesWidget.type = "INT";
       if (!this.durationFramesWidget.options) this.durationFramesWidget.options = {};
-      this.durationFramesWidget.options.hidden = !isVisible;
-      this.durationFramesWidget.hidden = !isVisible;
-
-      if (isVisible) {
-        delete this.durationFramesWidget.computeSize;
-      } else {
-        this.durationFramesWidget.computeSize = () => [0, 0];
-      }
+      this.durationFramesWidget.options.hidden = false;
+      this.durationFramesWidget.hidden = false;
+      delete this.durationFramesWidget.computeSize;
     }
     if (this.durationSecondsWidget) {
-      const isVisible = mode === "seconds";
-      // We don't set type to "hidden" anymore because it breaks rendering in Nodes 2.0.
-      // We keep the type as "FLOAT" and use computeSize to hide it.
+      // Always visible regardless of display mode
       this.durationSecondsWidget.type = "FLOAT";
       if (!this.durationSecondsWidget.options) this.durationSecondsWidget.options = {};
-      this.durationSecondsWidget.options.hidden = !isVisible;
-      this.durationSecondsWidget.hidden = !isVisible;
-
-      if (isVisible) {
-        delete this.durationSecondsWidget.computeSize;
-      } else {
-        this.durationSecondsWidget.computeSize = () => [0, 0];
-      }
+      this.durationSecondsWidget.options.hidden = false;
+      this.durationSecondsWidget.hidden = false;
+      delete this.durationSecondsWidget.computeSize;
     }
 
     // Force node resize and redraw deferred to next tick
@@ -3717,14 +3703,14 @@ class TimelineEditor {
 
         if (playDurationSec <= 0) continue;
 
-        const source = this.audioContext.createBufferSource();
-        source.buffer = audioBuffer;
-        source.connect(this.audioContext.destination);
+        const bufferNode = this.audioContext.createBufferSource();
+        bufferNode.buffer = audioBuffer;
+        bufferNode["connect"](this.audioContext.destination);
 
         const startTime = this.audioContext.currentTime + waitTimeSec;
-        source.start(startTime, fileOffsetSec, playDurationSec);
+        bufferNode.start(startTime, fileOffsetSec, playDurationSec);
 
-        this.activeAudioNodes.push(source);
+        this.activeAudioNodes.push(bufferNode);
       } catch (err) {
         console.error("Playback decode error for segment:", err);
       }
@@ -3842,7 +3828,7 @@ app.registerExtension({
 
         widget.computeSize = function (width) {
           const canvasH = self._timelineEditor ? self._timelineEditor.canvasHeight : CANVAS_HEIGHT;
-          return [width, canvasH + 600];
+          return [width, canvasH + 500];
         };
 
         const self = this;

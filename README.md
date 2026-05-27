@@ -1,3 +1,9 @@
+5/27/2026/
+Added some output parameters
+<img width="465" height="807" alt="QQ_1779882133479" src="https://github.com/user-attachments/assets/50c36272-91ae-4adb-b598-0294c494ef73" />
+
+
+
 # WhatDreamsCost-big
 Expand the image display for the WhatDreamsCost node and enlarge the input area of the prompt box
 Complete node address:  https://github.com/WhatDreamsCost/WhatDreamsCost-ComfyUI
